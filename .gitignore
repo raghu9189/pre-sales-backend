@@ -1,0 +1,17 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+main
+
+# Go specific
+*.test
+*.out
+
+# Env files
+.env
+
+# IDE/editor settings
+.vscode/
+.idea/
