@@ -22,7 +22,6 @@ type Lead struct {
 	Website        string `json:"website" gorm:"type:varchar(255)"`
 	Industry       string `json:"industry" gorm:"type:varchar(255)"`
 }
-
 type Estimate struct {
 	gorm.Model
 	EstimateTitle string          `json:"estimate_title" gorm:"type:varchar(255);not null"`
@@ -32,7 +31,6 @@ type Estimate struct {
 	TotalTax      float64         `json:"total_tax" gorm:"type:decimal(10,2);not null"`
 	Total         float64         `json:"total" gorm:"type:decimal(10,2);not null"`
 }
-
 type SupplierMaterial struct {
 	gorm.Model
 	Item      string          `json:"item" gorm:"type:varchar(255);not null"`
