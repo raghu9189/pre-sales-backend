@@ -1,16 +1,31 @@
 package main
 
 import (
+	"pre-sales-backend/config"
+	"pre-sales-backend/controllers"
+	"pre-sales-backend/models"
+
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
+func init() {
+	config.ConnectToDB()
+	config.DB.AutoMigrate(&models.Lead{}, &models.Estimate{}, &models.SupplierMaterial{})
+}
 
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+func main() {
+	router := gin.Default()
+	router.POST("/api/leads", controllers.CreateLead)
+	router.GET("/api/leads", controllers.ListAllLeads)
+	router.PUT("/api/leads/:id", controllers.UpdateLead)
+	router.DELETE("/api/leads/:id", controllers.DeleteLead)
+
+	router.POST("/api/estimates", controllers.CreateEstimate)
+	router.GET("/api/estimates", controllers.ListAllEstimates)
+	router.GET("/api/suppliers/:item", controllers.SupplierMaterial)
+
+	// router.POST("/api/quotes")
+	// router.GET("/api/quotes")
+	// router.PUT("/api/quotes/:id")
+	router.Run(":8081")
 }
